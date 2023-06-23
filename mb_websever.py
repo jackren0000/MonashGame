@@ -9,11 +9,6 @@ Original file is located at
 **Mount to Google Drive**
 """
 
-from google.colab import drive
-drive.mount('/content/drive')
-
-cd /content/drive/MyDrive/MonashBuildings/
-
 # flask is a Python library that lets you develop web servers.
 from flask import Flask, request
 import torch
