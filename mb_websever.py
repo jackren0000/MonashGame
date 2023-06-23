@@ -10,7 +10,7 @@ Original file is located at
 """
 
 # flask is a Python library that lets you develop web servers.
-from flask import Flask, request,jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import torch
 from PIL import Image
 from torchvision import transforms
