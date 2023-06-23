@@ -15,6 +15,27 @@ import torch
 from PIL import Image
 from torchvision import transforms
 
+class CNN(nn.Module):
+  def __init__(self, num_classes = 3):
+    super().__init__()
+    # First convolutional layer
+    self.conv1 = nn.Conv2d(3, 6, 5)
+    self.pool_1 = nn.MaxPool2d(2, 2)
+
+    # Second convolutional layer
+    self.conv2 = nn.Conv2d(6, 16, 5)
+    self.pool_2 = nn.MaxPool2d(2, 2)
+
+    # Fully connected layer
+    self.fc1 = nn.Linear(53 * 53 * 16, 120)
+    self.fc2 = nn.Linear(120, 84)
+    self.fc3 = nn.Linear(84, 3)
+
+# Instantiate your model and load its weights
+model = CNN()
+model.load_state_dict(torch.load('CNN_model.pth'))
+model.eval()
+
 app = Flask(__name__)
 model = torch.load('CNN_model.pth')
 
