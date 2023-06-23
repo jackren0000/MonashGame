@@ -13,7 +13,7 @@ import requests
 url = "http://127.0.0.1:5000/predict"
 
 # Open and read the image file
-with open('/train/Monash Hargrave Andrew Library/img0.jpg', 'rb') as f:
+with open('./train/Monash Hargrave Andrew Library/img0.jpg', 'rb') as f:
     img = f.read()
 
 # Create a dictionary to send in the HTTP request
