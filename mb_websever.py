@@ -66,6 +66,10 @@ model.eval()
 
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def index():
+    return send_from_directory('static', 'index.html')
+
 @app.route('/predict', methods=['POST'])
 def predict():
   file= request.files['file']
