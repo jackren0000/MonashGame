@@ -10,7 +10,7 @@ Original file is located at
 """
 
 # flask is a Python library that lets you develop web servers.
-from flask import Flask, request
+from flask import Flask, request,jsonify
 import torch
 from PIL import Image
 from torchvision import transforms
@@ -77,7 +77,7 @@ def predict():
   image = image.unsqueeze(0)
   output = model(image)
   _, prediction = torch.max(output, 1)
-  return {'prediction': prediction}
+  return jsonify({'prediction': prediction})
 
 if __name__ == '__main__':
   app.run(debug = True)
