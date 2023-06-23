@@ -76,7 +76,7 @@ def predict():
   image = transform(image)
   image = image.unsqueeze(0)
   output = model(image)
-  _, predicted = torch.max(output, 1)
+  _, prediction = torch.max(output, 1)
   return {'prediction': prediction}
 
 if __name__ == '__main__':
