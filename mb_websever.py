@@ -40,7 +40,6 @@ model.load_state_dict(torch.load('CNN_model.pth'))
 model.eval()
 
 app = Flask(__name__)
-model = torch.load('CNN_model.pth')
 
 @app.route('/predict', methods=['POST'])
 def predict():
