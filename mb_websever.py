@@ -28,7 +28,7 @@ def predict():
   file= request.files['file']
   image = Image.open(file.stream)
   transform = transforms.Compose(
-      [transforms.Resize(224, 224),
+      [transforms.Resize((224, 224)),
        transforms.ToTensor()])
   image = transform(image)
   image = image.unsqueeze(0)
@@ -38,22 +38,3 @@ def predict():
 
 if __name__ == '__main__':
   app.run(debug = True)
-
-import requests
-
-# The local URL where the Flask app is running
-url = "http://127.0.0.1:5000/predict"
-
-# Open and read the image file
-with open('./train/Monash Hargrave Andrew Library/img0.jpg', 'rb') as f:
-    img = f.read()
-
-# Create a dictionary to send in the HTTP request
-files = {"file": img}
-
-# Send the POST request
-response = requests.post(url, files=files)
-
-# Print the prediction
-print(response.json())
-
