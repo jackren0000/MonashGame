@@ -29,7 +29,7 @@ def predict():
   image = image.unsqueeze(0)
   output = model(image)
   _, predicted = torch.max(output, 1)
-  return {'prediction': int(predicted)}
+  return jsonify({'prediction': prediction})
 
 if __name__ == '__main__':
   app.run(debug = True)
