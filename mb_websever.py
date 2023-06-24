@@ -9,6 +9,24 @@ Original file is located at
 **Mount to Google Drive**
 """
 
+import openai
+openai.api_key = 'your-api-key'
+
+def generate_next_step(prompt, action):
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=f"{prompt}\n{action}\n",
+        temperature=0.6,
+        max_tokens=150
+    )
+
+    return response.choices[0].text.strip()
+
+
+
+
+
+
 # flask is a Python library that lets you develop web servers.
 from flask import Flask, request, jsonify, send_from_directory
 import torch
@@ -64,12 +82,6 @@ model = CNN()
 model.load_state_dict(torch.load('CNN_model.pth'))
 model.eval()
 
-# Assuming you have a dictionary with building names and their corresponding story parts
-story_parts = {0: "You start your adventure at the Learning and Teaching Building. Here you discover...",
-               1: "You arrive at the grand concert at the Robert Blackwood Hall. Among the musicians...",
-               2: "You have reached the Science Technology Research and Innovation Precinct. To get the artifact..."}
-
-
 app = Flask(__name__)
 
 # If there is a GET request to the root of the router, execute index() function.
@@ -91,8 +103,11 @@ def predict():
   _, predicted = torch.max(output, 1)
   prediction = predicted.item()
     
-  # Retrieve corresponding story part
-  story_part = story_parts[prediction]
+  # Instead of directly returning a pre-written story part, we will generate it using OpenAI's API.
+  # For simplicity, let's say that the 'action' is the name of the predicted building.
+  building_name = building_names[prediction]
+  story_part = generate_next_step("You are standing in front of a building.", f"I decided to enter the {building_name}.")
+
     
   return jsonify({'prediction': prediction, 'story': story_part})
 
