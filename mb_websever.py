@@ -10,7 +10,7 @@ Original file is located at
 """
 
 import openai
-openai.api_key = 'your-api-key'
+openai.api_key = 'J527boZKu6VhG9eqV469T3BlbkFJPh2iqLOqB8sMSPifW4EV'
 
 def generate_next_step(prompt, action):
     response = openai.Completion.create(
