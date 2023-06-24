@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Monash Building Classifier</title>
+    <title>Monash University Adventure</title>
 </head>
 <body>
-    <h1>Monash Building Classifier</h1>
-
+    <h1>Welcome to the Monash University Adventure!</h1>
     <form id="upload-form">
-        <input type="file" id="image-upload" name="image-upload" accept="image/*">
-        <button type="submit">Predict</button>
+        <input type="file" id="image-upload">
+        <button type="submit">Submit</button>
     </form>
-
-    <p id="prediction-result"></p>
-
+    <p id="building-name"></p>
+    <p id="story-part"></p>
+    
     <script>
-        document.getElementById('upload-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
+        document.getElementById('upload-form').addEventListener('submit', function(e) {
+            e.preventDefault();
             var formData = new FormData();
             formData.append('file', document.getElementById('image-upload').files[0]);
 
@@ -26,7 +24,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('prediction-result').textContent = 'Prediction: ' + data.prediction;
+                document.getElementById('building-name').textContent = "Building ID: " + data['prediction'];
+                document.getElementById('story-part').textContent = "Story: " + data['story'];
             })
             .catch(error => {
                 console.error(error);
