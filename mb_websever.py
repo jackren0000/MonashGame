@@ -82,6 +82,8 @@ model = CNN()
 model.load_state_dict(torch.load('CNN_model.pth'))
 model.eval()
 
+building_names = ['Monash Hargrave Andrew Library', 'Monash Menzies Building', 'Monash Sir Louis Matheson Library']
+
 app = Flask(__name__)
 
 # If there is a GET request to the root of the router, execute index() function.
