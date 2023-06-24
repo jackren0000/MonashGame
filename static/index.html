@@ -10,7 +10,7 @@
         <button type="submit">Submit</button>
     </form>
     <p id="building-name"></p>
-    <p id="story-part"></p>
+    <div id="story-container"></div>
     
     <script>
         document.getElementById('upload-form').addEventListener('submit', function(e) {
@@ -25,6 +25,12 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('building-name').textContent = "Building ID: " + data['prediction'];
+
+                // Create a new <p> element for the new part of the story
+                var newStoryPart = document.createElement('p');
+                newStoryPart.textContent = "Story: " + data['story'];
+
+                // Append the new story part to the story container
                 document.getElementById('story-part').textContent = "Story: " + data['story'];
             })
             .catch(error => {
