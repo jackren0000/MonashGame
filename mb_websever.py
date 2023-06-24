@@ -64,6 +64,12 @@ model = CNN()
 model.load_state_dict(torch.load('CNN_model.pth'))
 model.eval()
 
+# Assuming you have a dictionary with building names and their corresponding story parts
+story_parts = {0: "You start your adventure at the Learning and Teaching Building. Here you discover...",
+               1: "You arrive at the grand concert at the Robert Blackwood Hall. Among the musicians...",
+               2: "You have reached the Science Technology Research and Innovation Precinct. To get the artifact..."}
+
+
 app = Flask(__name__)
 
 # If there is a GET request to the root of the router, execute index() function.
@@ -85,7 +91,10 @@ def predict():
   _, predicted = torch.max(output, 1)
   prediction = predicted.item()
     
-  return jsonify({'prediction': prediction})
+  # Retrieve corresponding story part
+  story_part = story_parts[prediction]
+    
+  return jsonify({'prediction': prediction, 'story': story_part})
 
 if __name__ == '__main__':
   app.run(debug = True)
