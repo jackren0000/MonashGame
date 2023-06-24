@@ -31,7 +31,8 @@
                 newStoryPart.textContent = "Story: " + data['story'];
 
                 // Append the new story part to the story container
-                document.getElementById('story-part').textContent = "Story: " + data['story'];
+                document.getElementById('story-container').appendChild(newStoryPart);
+     
             })
             .catch(error => {
                 console.error(error);
