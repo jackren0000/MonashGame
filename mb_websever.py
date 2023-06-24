@@ -66,10 +66,12 @@ model.eval()
 
 app = Flask(__name__)
 
+# If there is a GET request to the root of the router, execute index() function.
 @app.route('/', methods=['GET'])
 def index():
     return send_from_directory('static', 'index.html')
 
+# If there is a POST request to the predict endpoint of the router, execute predict() function
 @app.route('/predict', methods=['POST'])
 def predict():
   file= request.files['file']
