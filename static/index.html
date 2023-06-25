@@ -36,6 +36,10 @@
 
                 // Append the new story part to the story container
                 document.getElementById('story-container').appendChild(newStoryPart);
+
+                // Clear the input fields
+                document.getElementById('image-upload').value = "";
+                document.getElementById('action-input').value = "";
      
             })
             .catch(error => {
