@@ -90,6 +90,9 @@ model.eval()
 
 building_names = ['Monash Hargrave Andrew Library', 'Monash Menzies Building', 'Monash Sir Louis Matheson Library']
 
+last_prediction = None
+last_building_name = None
+
 app = Flask(__name__)
 
 # If there is a GET request to the root of the router, execute index() function.
@@ -100,6 +103,9 @@ def index():
 # If there is a POST request to the predict endpoint of the router, execute predict() function
 @app.route('/predict', methods=['POST'])
 def predict():
+  global last_prediction
+  global last_building_name
+
   file= request.files.get('file', None)
   action = request.form.get('action', None)
 
