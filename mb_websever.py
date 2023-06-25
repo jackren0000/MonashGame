@@ -100,8 +100,11 @@ def index():
 # If there is a POST request to the predict endpoint of the router, execute predict() function
 @app.route('/predict', methods=['POST'])
 def predict():
-  file= request.files['file']
+  file= request.files.get('file', None)
   action = request.form.get('action', None)
+
+  # Initialize prediction to None
+  prediction = None
 
   if file is not None:
     image = Image.open(file.stream)
@@ -120,6 +123,7 @@ def predict():
   story_part = generate_next_step(action)
     
   return jsonify({'prediction': prediction, 'story': story_part})
+
 
 if __name__ == '__main__':
   app.run(debug = True)
