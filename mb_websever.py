@@ -12,13 +12,18 @@ Original file is located at
 import openai
 openai.api_key = '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'
 
-def generate_next_step(prompt, action):
+global story_so_far = "you are standing in front of a building."
+
+def generate_next_step(action):
+    story_so_far += "\n" + action
+    
     response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=f"{prompt}\n{action}\n",
+        engine="text-davinci-002",
+        prompt=f"{story_so_far}\n",
         temperature=0.6,
         max_tokens=150
     )
+    story_so_far += "\n" + response.choices[0].text.strip()
 
     return response.choices[0].text.strip()
 
@@ -95,21 +100,25 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
   file= request.files['file']
-  image = Image.open(file.stream)
-  transform = transforms.Compose(
+  action = request.form.get('action', None)
+
+  if file is not None:
+    image = Image.open(file.stream)
+    transform = transforms.Compose(
       [transforms.Resize((224, 224)),
        transforms.ToTensor()])
-  image = transform(image)
-  image = image.unsqueeze(0)
-  output = model(image)
-  _, predicted = torch.max(output, 1)
-  prediction = predicted.item()
-    
-  # Instead of directly returning a pre-written story part, we will generate it using OpenAI's API.
-  # For simplicity, let's say that the 'action' is the name of the predicted building.
-  building_name = building_names[prediction]
-  story_part = generate_next_step("You are standing in front of a building.", f"I decided to enter the {building_name}.")
+    image = transform(image)
+    image = image.unsqueeze(0)
+    output = model(image)
+    _, predicted = torch.max(output, 1)
+    prediction = predicted.item()
 
+    # If this is the initial action, enter the building
+    if action is None:
+      building_name = building_names[prediction]
+      action = f"I decided to enter the {building_name}."
+    
+  story_part = generate_next_step(action)
     
   return jsonify({'prediction': prediction, 'story': story_part})
 
