@@ -127,7 +127,7 @@ def predict():
   # Generate story part using action
   story_part = generate_next_step(action)
     
-  return jsonify({'prediction': prediction, 'story': story_part, 'building_name' = building_name})
+  return jsonify({'prediction': prediction, 'story': story_part, 'building_name' : building_name})
 
 
 if __name__ == '__main__':
