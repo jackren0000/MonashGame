@@ -15,7 +15,8 @@ openai.api_key = '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'
 story_so_far = "you are standing in front of a building."
 
 def generate_next_step(action):
-    global story_so_far += "\n" + action
+    global story_so_far
+    story_so_far += "\n" + action
     
     response = openai.Completion.create(
         engine="text-davinci-002",
