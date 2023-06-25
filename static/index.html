@@ -26,7 +26,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('building-name').textContent = "Building ID: " + data['prediction'];
+                document.getElementById('building-name').textContent = "You are inside the building: " + data['building_name'];
 
                 // Create a new <p> element for the new part of the story
                 var newStoryPart = document.createElement('p');
