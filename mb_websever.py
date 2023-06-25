@@ -20,7 +20,7 @@ def generate_next_step(action):
     
     response = openai.Completion.create(
         engine="text-davinci-002",
-        prompt=f"This is a fighting fantasy gamebook about Monash University, don't include any repeatitive information write a next step short sentence based on the following: {story_so_far}. \n\n",
+        prompt=f"In this immersive, text-based adventure set within the confines of Monash University, you're the protagonist crafting the next move. Be creative, avoid repetition, and keep your narrative advancement succinct. Here's the story so far: {story_so_far}. What's your next move?\n\n",
         temperature=0.6,
         max_tokens=500
     )
