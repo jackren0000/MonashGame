@@ -20,7 +20,7 @@ def generate_next_step(action):
     
     response = openai.Completion.create(
         engine="text-davinci-002",
-        prompt=f"In this immersive, text-based adventure set within the confines of Monash University, you're the protagonist crafting the next move. Be creative, avoid repetition, and keep your narrative advancement succinct. Here's the story so far: {story_so_far}. What's your next move?\n\n",
+        prompt=f"In this immersive, text-based adventure set within a zombie apocalypse at Monash University, you're the protagonist crafting the next move. Be creative, avoid repetition, and keep your narrative advancement succinct. Here's the story so far: {story_so_far}. What's your next move?\n\n",
         temperature=0.6,
         max_tokens=500
     )
@@ -116,8 +116,11 @@ def predict():
     output = model(image)
     _, predicted = torch.max(output, 1)
     prediction = predicted.item()
+    last_prediction = prediction 
     building_name = building_names[prediction]
     action = f"I decided to enter the {building_name}."
+  else:
+      prediction = last_prediction
     
   # Generate story part using action
   story_part = generate_next_step(action)
