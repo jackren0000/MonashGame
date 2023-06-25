@@ -20,7 +20,7 @@ def generate_next_step(action):
     
     response = openai.Completion.create(
         engine="text-davinci-002",
-        prompt=f"This is a fighting fantasy gamebook about Monash University, write a short sentence based on the following: {story_so_far}. \n\n",
+        prompt=f"This is a fighting fantasy gamebook about Monash University, don't include any repeatitive information write a short sentence based on the following: {story_so_far}. \n\n",
         temperature=0.6,
         max_tokens=500
     )
