@@ -20,8 +20,7 @@ def generate_next_step(action):
     
     response = openai.Completion.create(
         engine="text-davinci-002",
-        prompt=f"In this immersive, text-based adventure set within a zombie apocalypse at Monash University, you're the protagonist crafting the next move. Be creative, avoid repetition, and keep your narrative advancement succinct. Here's the story so far: {story_so_far}. What's your next move?\n\n",
-        temperature=0.6,
+        prompt=f"In this immersive, text-based adventure set within the confines of Monash University after zombie apocalypse, you're the protagonist crafting the next move. Be creative, avoid repetition, and keep your narrative advancement succinct. Here's the story so far: {story_so_far}. What's your next move?\n\n",
         max_tokens=500
     )
     story_so_far += "\n" + response.choices[0].text.strip()
