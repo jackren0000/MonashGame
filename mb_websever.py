@@ -113,12 +113,10 @@ def predict():
     output = model(image)
     _, predicted = torch.max(output, 1)
     prediction = predicted.item()
-
-    # If this is the initial action, enter the building
-    if action is None:
-      building_name = building_names[prediction]
-      action = f"I decided to enter the {building_name}."
+    building_name = building_names[prediction]
+    action = f"I decided to enter the {building_name}."
     
+  # Generate story part using action
   story_part = generate_next_step(action)
     
   return jsonify({'prediction': prediction, 'story': story_part})
