@@ -10,7 +10,7 @@ Original file is located at
 """
 
 import openai
-openai.api_key = 'sk-kHl0AvuILHBMLSX4nd9lT3BlbkFJj7VdUTfpzg8GtBmPRQOq4'
+openai.api_key = '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'
 
 story_so_far = "you are standing in front of a building."
 
