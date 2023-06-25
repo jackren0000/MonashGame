@@ -12,10 +12,10 @@ Original file is located at
 import openai
 openai.api_key = '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'
 
-global story_so_far = "you are standing in front of a building."
+story_so_far = "you are standing in front of a building."
 
 def generate_next_step(action):
-    story_so_far += "\n" + action
+    global story_so_far += "\n" + action
     
     response = openai.Completion.create(
         engine="text-davinci-002",
