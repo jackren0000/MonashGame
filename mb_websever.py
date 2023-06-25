@@ -118,14 +118,16 @@ def predict():
     prediction = predicted.item()
     last_prediction = prediction 
     building_name = building_names[prediction]
+    last_building_name = building_name
     action = f"I decided to enter the {building_name}."
   else:
       prediction = last_prediction
+      building_name = last_building_name
     
   # Generate story part using action
   story_part = generate_next_step(action)
     
-  return jsonify({'prediction': prediction, 'story': story_part})
+  return jsonify({'prediction': prediction, 'story': story_part, 'building_name' = building_name})
 
 
 if __name__ == '__main__':
